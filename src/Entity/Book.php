@@ -22,6 +22,9 @@ class Book
     #[ORM\Column(length: 4)]
     private ?string $year = null;
 
+    #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?Category $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,6 +69,18 @@ class Book
     public function setYear(string $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
