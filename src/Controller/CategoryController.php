@@ -17,11 +17,11 @@ class CategoryController extends AbstractController
     #[Route('/category/new', name: 'app_category_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $catgeory = new Category();
-        $form = $this->createForm(CategoryType::class, $catgeory)->add('Save', SubmitType::class);
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category)->add('Save', SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($catgeory);
+            $entityManager->persist($category);
             $entityManager->flush();
             return $this->redirectToRoute('app_home');
         }
