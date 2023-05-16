@@ -22,8 +22,16 @@ class Book
     #[ORM\Column(length: 4)]
     private ?string $year = null;
 
-    #[ORM\ManyToOne(inversedBy: 'books')]
-    private ?Category $category = null;
+    public function __construct(
+        #[ORM\ManyToOne(inversedBy: 'books')]
+        #[ORM\JoinColumn(nullable: false)]
+        private ?Category $category = null
+    ) {
+    }
+    public function getCategoryName(): string
+    {
+        return $this->category->getName();
+    }
 
     public function getId(): ?int
     {
